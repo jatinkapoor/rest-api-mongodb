@@ -43,11 +43,11 @@ public class AccountController {
 
     @RequestMapping(value = "/account", method = RequestMethod.DELETE)
     public ResponseEntity deleteAccount(@RequestParam String id) {
-        return ResponseEntity.status(HttpStatus.OK).body(!accountService.delete(id));
+        return ResponseEntity.status(HttpStatus.OK).body(accountService.delete(id));
     }
 
     @RequestMapping(value = "/account", method = RequestMethod.PUT)
-    public ResponseEntity updateAccount(@RequestBody Account account) {
+    public ResponseEntity<Boolean> updateAccount(@RequestBody Account account) {
         return ResponseEntity.status(HttpStatus.OK).body(accountService.updateAccount(account));
     }
 }

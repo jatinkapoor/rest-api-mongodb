@@ -26,13 +26,27 @@ public class AccountService {
     }
 
     public Boolean delete(String id) {
-        accountRepository.deleteById(id);
         Boolean exists = accountRepository.existsById(id);
-        return exists;
+        if (exists == true) {
+            accountRepository.deleteById(id);
+            return true;
+        } else {
+            return false;
+        }
     }
 
-    public Account updateAccount(Account account){
-        return accountRepository.save(account);
+    public Boolean updateAccount(Account account){
+        Boolean exists = accountRepository.existsById(account.getId());
+        if (exists) {
+             Account updatedAccount = accountRepository.save(account);
+             if (updatedAccount.getId() == account.getId()) {
+                 return true;
+             } else {
+                 return false;
+             }
+        } else {
+            return false;
+        }
     }
 
 }
